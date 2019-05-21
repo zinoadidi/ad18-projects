@@ -7,7 +7,9 @@ public class MoveCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //code to move camera
         GetComponent<Rigidbody>().velocity = new Vector3(0,0,4);
+
         
     }
 
