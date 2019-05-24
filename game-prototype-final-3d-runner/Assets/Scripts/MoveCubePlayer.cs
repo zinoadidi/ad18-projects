@@ -8,11 +8,14 @@ public class MoveCubePlayer : MonoBehaviour
     public KeyCode MoveCubePlayerLeftKey;
     
     public KeyCode MoveCubePlayerRightKey;
+    public KeyCode MoveCubePlayerSpacebarKey;
 
     public float HorizontalVelocity = 0;
+    public float VerticalVelocity = 0;
   
     public int LaneTracker = 2;
     public string ControlLock = "no";
+    public string JumpLock = "no";
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,7 @@ public class MoveCubePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody> ().velocity = new Vector3 (HorizontalVelocity, 0, 4);
+        GetComponent<Rigidbody> ().velocity = new Vector3 (HorizontalVelocity, VerticalVelocity, 1);
        
         if((Input.GetKeyDown (MoveCubePlayerLeftKey)) && (LaneTracker > 1) && (ControlLock == "no")){
             Debug.Log("linetracker before left:"+LaneTracker);
@@ -44,6 +47,28 @@ public class MoveCubePlayer : MonoBehaviour
             ControlLock = "yes";
 
         }
+        if((Input.GetKeyDown (MoveCubePlayerSpacebarKey)) && (ControlLock == "no")){
+            Debug.Log("jump initiated:");
+        
+           // Debug.Log(GetObject<CubeEnemy> ().Transform.Position.Y);
+            VerticalVelocity = 10;
+            JumpLock = "yes";
+            StartCoroutine(stopJump());
+            //stopJump();
+            resetJumpToZero();
+
+            
+
+
+            
+            /* VerticalVelocity = -2;
+            StartCoroutine(stopSlide());    
+            ControlLock = "yes"; */
+
+            Debug.Log("jump completed:");
+            Debug.Log(VerticalVelocity);
+
+        }
         
     }
 
@@ -53,4 +78,25 @@ public class MoveCubePlayer : MonoBehaviour
         ControlLock = "no";
 
     }
+    IEnumerator stopJump(){
+        yield return new WaitForSeconds (.3f);
+        VerticalVelocity = 0;
+        if(VerticalVelocity!=0){
+            VerticalVelocity = 0;
+        }
+    }
+    IEnumerator resetJumpToZero(){
+        yield return new WaitForSeconds (.3f);
+        VerticalVelocity = 0;
+        JumpLock = "no";
+    }
+
+    void OnCollisionEnter(Collision other){
+     if(other.gameObject.tag == "CubeEnemy"){
+         Destroy(gameObject);
+         
+     }
+    }
 }
+
+

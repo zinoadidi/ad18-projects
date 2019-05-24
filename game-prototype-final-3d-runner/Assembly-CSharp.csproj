@@ -53,8 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scrpts\MoveCamera.cs" />
-     <Compile Include="Assets\scrpts\MoveCubePlayer.cs" />
+     <Compile Include="Assets\Scripts\MoveCamera.cs" />
+     <Compile Include="Assets\Scripts\MoveCubePlayer.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/zinoadidi/webFiles/ad18-projects/game-prototype-final-3d-runner/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

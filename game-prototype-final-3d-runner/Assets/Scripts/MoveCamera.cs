@@ -8,7 +8,7 @@ public class MoveCamera : MonoBehaviour
     void Start()
     {
         //code to move camera
-        GetComponent<Rigidbody>().velocity = new Vector3(0,0,4);
+        GetComponent<Rigidbody>().velocity = new Vector3(0,0,1);
 
         
     }
