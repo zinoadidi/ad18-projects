@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CubeEnemy
+  - PowerUp
+  - PowerUpHealth
   layers:
   - Default
   - TransparentFX
