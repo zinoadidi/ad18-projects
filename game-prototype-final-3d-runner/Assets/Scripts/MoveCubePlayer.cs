@@ -96,7 +96,16 @@ public class MoveCubePlayer : MonoBehaviour
          Destroy(gameObject);
          
      }
+     if(other.gameObject.tag == "PowerUp"){
+         Destroy(other.gameObject);
+         
+     }
+
+     if(other.gameObject.name == "PowerUpHealthContainer"){
+         Destroy(other.gameObject);
+         
+     }
     }
 }
-
+ 
 
