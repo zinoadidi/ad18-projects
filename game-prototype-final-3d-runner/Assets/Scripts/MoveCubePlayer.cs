@@ -19,7 +19,9 @@ public class MoveCubePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GMScript.PlayerScore = 0;
+        GMScript.LivesLeft = 3;
+        GMScript.GameState = "active";
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class MoveCubePlayer : MonoBehaviour
  
        GMScript.HorizontallVelocity = GetComponent<Rigidbody> ().velocity[0];
        GMScript.VerticalVelocity = GetComponent<Rigidbody> ().velocity[1];
+       GMScript.ZAxis = GetComponent<Rigidbody> ().velocity[2];
 
 
         if((Input.GetKeyDown (MoveCubePlayerLeftKey)) && (LaneTracker > 1) && (ControlLock == "no")){
@@ -74,8 +77,9 @@ public class MoveCubePlayer : MonoBehaviour
 
         }
 
-
-
+        if(GMScript.LivesLeft <1){
+            GMScript.EndGame(); 
+        }
         
         
     }
@@ -99,20 +103,28 @@ public class MoveCubePlayer : MonoBehaviour
         JumpLock = "no";
     }
 
+    IEnumerator Blink() {
+        GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds (.3f);
+        GetComponent<Renderer>().enabled = true;
+        
+    }
     void OnCollisionEnter(Collision other){
      if(other.gameObject.tag == "CubeEnemy"){
-         Destroy(gameObject);
+         Destroy(other.gameObject);         
+         Blink();
+         GMScript.LivesLeft -=1;
+         GMScript.ShowPlayerStats();
+         ///Destroy(gameObject);
          
      }
      if(other.gameObject.tag == "PowerUp"){
+         GMScript.PlayerScore += 100;
          Destroy(other.gameObject);
+         GMScript.ShowPlayerStats();
          
      }
 
-     if(other.gameObject.name == "PowerUpHealthContainer"){
-         Destroy(other.gameObject);
-         
-     }
     }
 }
  
