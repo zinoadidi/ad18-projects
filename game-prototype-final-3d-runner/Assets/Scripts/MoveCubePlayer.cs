@@ -10,8 +10,8 @@ public class MoveCubePlayer : MonoBehaviour
     public KeyCode MoveCubePlayerRightKey;
     public KeyCode MoveCubePlayerSpacebarKey;
 
-    public float HorizontalVelocity = 0;
-    public float VerticalVelocity = 0;
+    public float HorizontalVelocity = 0f;
+    public float VerticalVelocity = 0f;
   
     public int LaneTracker = 2;
     public string ControlLock = "no";
@@ -25,8 +25,12 @@ public class MoveCubePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody> ().velocity = new Vector3 (HorizontalVelocity, VerticalVelocity, 1);
-       
+        GetComponent<Rigidbody> ().velocity = new Vector3 (HorizontalVelocity, VerticalVelocity, 2);
+ 
+       GMScript.HorizontallVelocity = GetComponent<Rigidbody> ().velocity[0];
+       GMScript.VerticalVelocity = GetComponent<Rigidbody> ().velocity[1];
+
+
         if((Input.GetKeyDown (MoveCubePlayerLeftKey)) && (LaneTracker > 1) && (ControlLock == "no")){
             Debug.Log("linetracker before left:"+LaneTracker);
              
@@ -69,6 +73,10 @@ public class MoveCubePlayer : MonoBehaviour
             Debug.Log(VerticalVelocity);
 
         }
+
+
+
+        
         
     }
 

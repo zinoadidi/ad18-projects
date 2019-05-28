@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\effects.cs" />
+     <Compile Include="Assets\Scripts\GMScript.cs" />
      <Compile Include="Assets\Scripts\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\MoveCubePlayer.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">

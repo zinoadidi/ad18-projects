@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class GMScript : MonoBehaviour
 {
+    public static float VerticalVelocity = 0.0f;
+    public static float HorizontallVelocity = 0.0f;
+  
     // Start is called before the first frame update
     void Start()
     {
-        //code to move camera
-
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody>().velocity = new Vector3(GMScript.HorizontallVelocity,GMScript.VerticalVelocity,2);
-
+        
     }
 }
