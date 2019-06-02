@@ -32,7 +32,8 @@ public class MoveCubePlayer : MonoBehaviour
        GMScript.HorizontallVelocity = GetComponent<Rigidbody> ().velocity[0];
        GMScript.VerticalVelocity = GetComponent<Rigidbody> ().velocity[1];
        GMScript.ZAxis = GetComponent<Rigidbody> ().velocity[2];
-
+    
+        //jump();
 
         if((Input.GetKeyDown (MoveCubePlayerLeftKey)) && (LaneTracker > 1) && (ControlLock == "no")){
             Debug.Log("linetracker before left:"+LaneTracker);
@@ -54,34 +55,45 @@ public class MoveCubePlayer : MonoBehaviour
             ControlLock = "yes";
 
         }
-        if((Input.GetKeyDown (MoveCubePlayerSpacebarKey)) && (ControlLock == "no")){
+        if(Input.GetKeyDown (MoveCubePlayerSpacebarKey))
+        {
             Debug.Log("jump initiated:");
-        
-           // Debug.Log(GetObject<CubeEnemy> ().Transform.Position.Y);
-            VerticalVelocity = 10;
-            JumpLock = "yes";
-            StartCoroutine(stopJump());
+
+            // Debug.Log(GetObject<CubeEnemy> ().Transform.Position.Y);
+            jump();
             //stopJump();
-            resetJumpToZero();
-
-            
+            //resetJumpToZero();
 
 
-            
+
+
+
             /* VerticalVelocity = -2;
             StartCoroutine(stopSlide());    
             ControlLock = "yes"; */
 
-            Debug.Log("jump completed:");
-            Debug.Log(VerticalVelocity);
+          
 
         }
 
-        if(GMScript.LivesLeft <1){
+        if (GMScript.LivesLeft <1){
             GMScript.EndGame(); 
         }
         
         
+    }
+
+    private void jump()
+    {
+        if(JumpLock == "no"){
+            VerticalVelocity = 2;
+            JumpLock = "yes";
+          
+            Debug.Log("jump completed:");
+            Debug.Log(VerticalVelocity);
+            StartCoroutine(stopJump());
+        }
+       
     }
 
     IEnumerator stopSlide(){
@@ -91,15 +103,15 @@ public class MoveCubePlayer : MonoBehaviour
 
     }
     IEnumerator stopJump(){
-        yield return new WaitForSeconds (.3f);
+        yield return new WaitForSeconds (.1f);
         VerticalVelocity = 0;
         if(VerticalVelocity!=0){
             VerticalVelocity = 0;
         }
+        resetJumpToZero();
     }
     IEnumerator resetJumpToZero(){
-        yield return new WaitForSeconds (.3f);
-        VerticalVelocity = 0;
+        yield return new WaitForSeconds (.10f);
         JumpLock = "no";
     }
 
@@ -122,6 +134,11 @@ public class MoveCubePlayer : MonoBehaviour
          GMScript.PlayerScore += 100;
          Destroy(other.gameObject);
          GMScript.ShowPlayerStats();
+         
+     }
+
+     if(other.gameObject.tag == "Platform"){
+         jump();
          
      }
 

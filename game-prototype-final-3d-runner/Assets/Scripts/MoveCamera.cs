@@ -15,7 +15,7 @@ public class MoveCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody>().velocity = new Vector3(GMScript.HorizontallVelocity,GMScript.VerticalVelocity,GMScript.ZAxis);
+        //GetComponent<Rigidbody>().velocity = new Vector3(GMScript.HorizontallVelocity,GMScript.VerticalVelocity,GMScript.ZAxis);
 
     }
 }
