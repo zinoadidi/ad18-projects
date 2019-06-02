@@ -5,11 +5,7 @@ using UnityEngine;
 public class MoveCubePlayer : MonoBehaviour
 {
 
-    public KeyCode MoveCubePlayerLeftKey;
-    
-    public KeyCode MoveCubePlayerRightKey;
-    public KeyCode MoveCubePlayerSpacebarKey;
-
+    public KeyCode MoveCubePlayerLeftKey,MoveCubePlayerRightKey,MoveCubePlayerSpacebarKey;
     public float HorizontalVelocity = 0f;
     public float VerticalVelocity = 0f;
   
@@ -35,7 +31,11 @@ public class MoveCubePlayer : MonoBehaviour
     
         //jump();
 
-        if((Input.GetKeyDown (MoveCubePlayerLeftKey)) && (LaneTracker > 1) && (ControlLock == "no")){
+        if(
+            ((Input.GetKeyDown (MoveCubePlayerLeftKey)) ||
+            (MobileControl.mSwipeLeft)) &&
+            (LaneTracker > 1) && (ControlLock == "no") 
+        ){
             Debug.Log("linetracker before left:"+LaneTracker);
              
             HorizontalVelocity = -2;
@@ -45,7 +45,7 @@ public class MoveCubePlayer : MonoBehaviour
             ControlLock = "yes";
 
         }
-        if((Input.GetKeyDown (MoveCubePlayerRightKey)) && (LaneTracker < 3) && (ControlLock == "no")){
+        if(((Input.GetKeyDown (MoveCubePlayerRightKey)) || (MobileControl.mSwipeRight)) && (LaneTracker < 3) && (ControlLock == "no")){
             Debug.Log("linetracker before right:"+LaneTracker);
             
             HorizontalVelocity = 2;
@@ -131,8 +131,8 @@ public class MoveCubePlayer : MonoBehaviour
          
      }
      if(other.gameObject.tag == "PowerUp"){
-         GMScript.PlayerScore += 100;
          Destroy(other.gameObject);
+         GMScript.PlayerScore += 100;
          GMScript.ShowPlayerStats();
          
      }
