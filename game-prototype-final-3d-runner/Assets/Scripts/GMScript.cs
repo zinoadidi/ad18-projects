@@ -36,7 +36,8 @@ public class GMScript : MonoBehaviour
     public static void EndGame(){
         ShowPlayerStats();
         GameState = "active";
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("GameOver");
     }
 }
 
